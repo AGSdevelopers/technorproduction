@@ -1,0 +1,67 @@
+<script defer>
+    /*
+        @author : Extend
+        @version : 06.17.2021
+        
+        extend-product-integration.html
+        
+        This file handles variant changes for the product page
+    */
+    window.addEventListener('DOMContentLoaded', function(){
+        if (window.Extend && window.ExtendBigCommerce) {
+            function initProductOffer(modalProductId){
+                /************************/
+                /*  global variables   */
+                /***********************/
+                var productId;
+                {{#if page_type '===' 'product'}}
+                    productId = modalProductId ? modalProductId : {{{json product.id}}};
+                {{else}}
+                    productId = modalProductId.toString();
+                {{/if}}
+                var storefrontApiToken = {{{json settings.storefront_api.token}}}
+                var modalContent = document.querySelector('#modal .modal-content');
+                var $productOptionsElement = modalProductId ? modalContent.querySelector('[data-product-option-change]') : document.querySelector('[data-product-option-change]');
+                var extendOffer = modalProductId ? modalContent.querySelector('#extend-offer') : document.querySelector('#extend-offer');
+                var slice = Array.prototype.slice;
+
+                /************************/
+                /*    util functions   */
+                /***********************/
+                // findAll function handles browser compatability issues for querySelectorAll
+                function findAll(element) {
+                    var items = document.querySelectorAll(element);
+                    return items ? slice.call(items, 0) : [];
+                }
+                //Only continue if we have required variables
+                if(productId && storefrontApiToken){
+                    if($productOptionsElement && $productOptionsElement.innerText !== ''){
+                        // extendOffer.style.display = 'none';
+                    }
+                    // ExtendBigCommerce.getProductById(productId, storefrontApiToken)
+                    // Gets product by id, and listens for select change to update variant 
+                    ExtendBigCommerce.getProductById({
+                        productId,
+                        storefrontApiToken,
+                        done: function(err, result) {
+                            //Find current product node
+                            var currentProductNode = result.data.site.products.edges.find(it => String(it.node.entityId) === productId);
+                            //select variants, and initial sku from variants (first variant)
+                            var productVariants = currentProductNode.node.variants.edges;
+                            let sku =  productVariants[0].node.sku;
+                            //Render initial PDP offers with the SKU
+                            Extend.buttons.render(extendOffer, {referenceId: sku});
+                            
+                        }
+                    })
+                }
+            }
+            window.initProductOffer = initProductOffer;
+        }
+    })
+</script>
+<style>
+    #extend-offer {
+        padding-bottom: 5px;
+    }
+</style>

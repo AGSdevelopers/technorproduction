@@ -1,0 +1,183 @@
+<div class="header-container {{#if theme_settings.sticky_topMenu '===' true}}sticky-header{{/if}}">
+
+    <div class="top-ribbon">
+        <div class="content-ribbon">
+            <div class=" account-links alm" style="display: none;">
+                <ul>
+                    {{#if settings.account_creation_enabled}}
+                        <li class="navUser-item navUser-item--account" style="margin-right: 2rem;">
+                            {{#if customer}}
+                                <a class="navUser-action account" href="{{urls.account.index}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                <a class="navUser-action logout" href="{{urls.auth.logout}}">{{lang 'common.logout'}}</a>
+                            {{else}}
+                                <a class="navUser-action" href="{{urls.auth.login}}" ><!-- <i class="fa fa-user" aria-hidden="true"></i> --><a class="navUser-action login" href="{{urls.auth.login}}" style="padding-right: 15px;border-right: 1px solid;">{{lang 'common.login'}}</a><span class="or-text">|</span><a class="navUser-action create" href="{{urls.auth.create_account}}">{{lang 'Sign Up'}}</a>
+                            {{/if}}
+                         </li>
+                    {{/if}}
+                    <!-- <li class="navUser-item navUser-item--cart">
+                        <a
+                            class="navUser-action"
+                            data-cart-preview
+                            data-dropdown="cart-preview-dropdown"
+                            data-options="align:right"
+                            href="{{urls.cart}}">
+                            <span class="navUser-item-cartLabel"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <i class="fa-solid fa-cart-shopping"></i> </span> <span class="countPill{{#if cart.items}} countPill--positive{{/if}} cart-quantity">{{cart.quantity}}</span>
+                        </a>
+
+                        <div class="dropdown-menu" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true"></div>
+                    </li> -->
+                </ul>
+            </div>
+            <span>SAME DAY shipping when you order by 2pm CT (M-Sa).  🚛 FREE shipping on all US continental orders.</span>
+            <div class="right account-links ald">
+                <ul>
+                    {{#if settings.account_creation_enabled}}
+                        <li class="navUser-item navUser-item--account" style="margin-right: 2rem;">
+                            {{#if customer}}
+                                <a class="navUser-action account" href="{{urls.account.index}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                <a class="navUser-action logout" href="{{urls.auth.logout}}">{{lang 'common.logout'}}</a>
+                            {{else}}
+                                <a class="navUser-action" href="{{urls.auth.login}}"><!-- <i class="fa fa-user" aria-hidden="true"></i> --><a class="navUser-action login" href="{{urls.auth.login}}">{{lang 'common.login'}}</a><span class="or-text">|</span><a class="navUser-action create" href="{{urls.auth.create_account}}">{{lang 'Sign Up'}}</a>
+                            {{/if}}
+                         </li>
+                    {{/if}}
+                    <li class="navUser-item navUser-item--cart">
+                        <a
+                            class="navUser-action"
+                            data-cart-preview
+                            data-dropdown="cart-preview-dropdown"
+                            data-options="align:right"
+                            href="{{urls.cart}}">
+                            <span class="navUser-item-cartLabel"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <i class="fa-solid fa-cart-shopping"></i> </span> <span class="countPill{{#if cart.items}} countPill--positive{{/if}} cart-quantity">{{cart.quantity}}</span>
+                        </a>
+
+                        <div class="dropdown-menu ddmm" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true"></div>
+                    </li>
+                </ul>
+            </div> 
+        </div>
+    </div>
+
+    <div class="header-container full-width {{#if theme_settings.slider_width '===' 'full-width'}} full-width-auto {{/if}} full-width{{#if theme_settings.header-layout '!==' 'full-width'}} in-container{{/if}}">
+      <div class="header-padding{{#if theme_settings.header-layout '===' 'in-container-with-padding-no-margin'}} in-container-with-padding-no-margin{{/if}}">
+      <div class="header-padding{{#if theme_settings.header-layout '===' 'in-container-with-padding'}} in-container-with-padding{{/if}}">
+      <header class="header" role="banner">
+
+        <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
+            <span class="mobileMenu-toggleIcon">Toggle menu</span>
+        </a>
+            <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
+                {{> components/common/store-logo}}
+            </h1>
+            <!-- <li class="navUser-item  navUser-item--cart">
+                <a
+                    class="navUser-action"
+                    data-cart-preview
+                    data-dropdown="cart-preview-dropdown"
+                    data-options="align:right"
+                    href="{{urls.cart}}">
+                    <span class="navUser-item-cartLabel"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> <span class="countPill{{#if cart.items}} countPill--positive{{/if}} cart-quantity">{{cart.quantity}}</span>
+                </a>
+
+                <div class="dropdown-menu" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true"></div>
+            </li> -->
+
+
+            <div class="navPages-container main-nav main-nav-custom" id="menu" data-menu>
+                <nav class="navPages">
+                    <div class="custom-pages-nav">
+                        <div id="desktop-menu" class="custom-menu-desktop">
+                        <h2 class="container-header mobile">Main Menu</h2>
+                        {{#each pages}}
+                            <li class="navPages-item">
+                                {{> components/common/navigation-list}}
+                            </li>
+                        {{/each}}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+
+
+    <!-- Begin Search Bar -->
+
+
+
+     <div class="navPages-container inside-header left-logo" id="menu" data-menu>
+        <nav class="navPages">
+            <div class="navPages-quickSearch right searchbar">
+                {{> components/common/quick-search}}
+            </div>
+        </nav>
+    </div>
+    <div class="navPages-container inside-header right-logo" id="menu" data-menu>
+        <nav class="navPages">
+            <div class="navPages-quickSearch right searchbar">
+                {{> components/common/quick-search}}
+            </div>
+        </nav>
+    </div>
+    <div class="navPages-container inside-header center-logo" id="menu" data-menu>
+        <nav class="navPages">
+            <div class="navPages-quickSearch right searchbar">
+                {{> components/common/quick-search}}
+            </div>
+        </nav>
+    </div>
+
+
+
+    <!-- End Search Bar -->
+
+
+
+
+    <div class="mobile-menu navPages-container" id="menu" data-menu>
+      <div class="currency-converter">
+        <ul class="navPages-list navPages-list--user">
+            {{#if currency_selector.currencies.length '>' 1}}
+                <li class="navPages-item">
+                    <a class="navPages-action has-subMenu" href="#" data-collapsible="navPages-currency" aria-controls="navPages-currency" aria-expanded="false">
+                        {{lang 'common.currency' code=currency_selector.active_currency_code}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-down"></use></svg></i>
+                    </a>
+                    <div class="navPage-subMenu" id="navPages-currency" aria-hidden="true" tabindex="-1">
+                        <ul class="navPnavPagesage-subMenu-list">
+                            {{#each currency_selector.currencies}}
+                            <li class="navPage-subMenu-item">
+                                <a class="navPage-subMenu-action navPages-action" href="{{{switch_url}}}">
+                                    {{#if is_active}}
+                                        <strong>{{name}}</strong>
+                                    {{else}}
+                                        {{name}}
+                                    {{/if}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </li>
+            {{/if}}
+        </ul>
+      </div>
+            {{> components/common/navigation-menu}}
+    </div>
+    </header>
+    </div>
+    </div>
+    </div>
+
+    <div class="main-nav-container{{#if theme_settings.header-layout '!==' 'in-container'}} full-width{{/if}} {{#if theme_settings.header-layout '===' 'in-container'}} in-container{{/if}}">
+      <div class="navPages-container main-nav" id="menu" data-menu>
+            {{> components/common/navigation-menu}}
+      </div>
+    </div>
+    </div>
+    <div>
+
+        <div class="navPages-quickSearch searchbar" >
+            {{> components/common/quick-search}}
+        </div>
+
+    </div>

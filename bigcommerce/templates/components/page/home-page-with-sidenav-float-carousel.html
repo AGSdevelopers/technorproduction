@@ -1,0 +1,99 @@
+<div class="main full home">
+  <div class="main floated-carousel">
+
+        {{> components/custom/sidenav}}
+
+<div class="main-content">
+  <h2 class="categorie-title">SHOP BY CATEGORY</h2>
+  <div class="categories-carousel">
+    
+    <div>
+      <a href="/garmin-rv-gps-and-cameras/">
+        <img src="{{cdn 'assets/img/garmin.png'}}">
+        <span>Garmin GPS And Cameras</span>
+      </a>
+    </div>
+    <div>
+      <a href="/gasstop">
+        <img src="{{cdn 'assets/img/gasstop.png'}}">
+        <span>Gasstop Propane Safety</span>
+      </a>
+    </div>
+    <div>
+      <a href="/soft-start-air-conditioning-device/">
+        <img src="{{cdn 'assets/img/sofstart.png'}}">
+        <span>Softstart Air Conditioning <br> Device</span>
+      </a>
+    </div>
+    <div>
+      <a href="/suction-cup-antenna-mount/">
+        <img src="{{cdn 'assets/img/suction.png'}}">
+        <span>Suction Cup Antenna Mount</span>
+      </a>
+    </div>
+    <div>
+      <a href="/tst-tire-pressure-monitoring-systems/">
+        <img src="{{cdn 'assets/img/tiresafety.png'}}">
+        <span>Tire Safety And TPMS</span>
+      </a>
+    </div>
+    <div>
+      <a href="/viair-air-compressors/">
+        <img src="{{cdn 'assets/img/viair.png'}}">
+        <span>Viair Air Compressors</span>
+      </a>
+    </div>
+    <div>
+      <a href="/best-sellers/">
+        <img src="{{cdn 'assets/img/best-sellers.png'}}">
+        <span>Best Sellers</span>
+      </a>
+    </div>
+  </div>
+
+  {{#if carousel}}
+    <div class="slider float{{#if theme_settings.slider_width '!==' 'full-width'}} in-container{{/if}} {{#if theme_settings.slide_content_background '===' 'without-bg'}} slide-content-no-bg{{/if}}">
+      {{> components/carousel}}
+    </div> <!-- slider -->
+  {{/if}}
+
+    {{#if banners.top}}
+        <div class="banners top" data-banner-location="top">
+            <div class="banner">
+              {{{limit banners.top 1}}}
+            </div> <!-- banner -->
+        </div> <!-- banners -->
+     {{/if}}
+
+     <div class="featured-products-section">
+       {{#if products.featured}}
+           {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+       {{/if}}
+
+       {{#if products.top_sellers}}
+           {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+       {{/if}}
+
+       {{#if products.new}}
+           {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+       {{/if}}
+       <div class="clear"></div>
+     </div>
+
+     {{#if banners.bottom}}
+         <div class="banners bottom" data-banner-location="bottom">
+             <div class="banner">
+             {{{limit banners.bottom 1}}}
+             </div> <!-- banner -->
+         </div> <!-- banners -->
+      {{/if}}
+
+<div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+
+    </div> <!-- right-main -->
+
+    <div class="clear"></div>
+
+</div> <!-- main full home -->

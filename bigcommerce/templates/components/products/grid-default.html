@@ -1,0 +1,9 @@
+<ul class="productGrid--maxCol{{ columns }} grid-default">
+<ul class="productGrid visible">
+    {{#each products}}
+    <li class="product">
+        {{>components/products/card show_compare=../show_compare show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer}}
+    </li>
+    {{/each}}
+</ul>
+</ul>

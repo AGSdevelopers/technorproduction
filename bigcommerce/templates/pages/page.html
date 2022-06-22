@@ -1,0 +1,21 @@
+---
+blog:
+    recent_posts:
+        limit: {{theme_settings.homepage_blog_posts_count}}
+---
+{{#partial "page"}}
+
+<main class="page content{{#if theme_settings.content_page_layout '!==' 'no-sidenav'}} content-page-with-sidenav{{/if}}">
+
+    {{#if ../theme_settings.content_page_layout '===' 'no-sidenav'}}
+      {{> components/page/content-page-no-sidenav}}
+    {{/if}}
+    {{#if ../theme_settings.content_page_layout '===' 'with-sidenav'}}
+      {{> components/page/content-page-with-sidenav}}
+    {{/if}}
+
+</main>
+
+{{/partial}}
+
+{{> layout/base}}

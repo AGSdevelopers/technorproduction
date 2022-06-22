@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ head.title }}</title>
+    {{{ head.meta_tags }}}
+    {{{ head.config }}}
+
+    <link href="{{ head.favicon }}" rel="shortcut icon">
+    {{#block "head"}}{{/block}}
+
+</head>
+<body class="main{{#if theme_settings.body_width '===' 960}} nine-sixty{{/if}} {{#if theme_settings.body_width '===' 1170}} eleven-seventy {{/if}} {{#if theme_settings.body_width '===' 1280}} twelve-eighty {{/if}} {{#if theme_settings.body_width '===' 1366}} thirteen-sixty-six {{/if}} {{#if theme_settings.body_width '===' 1440}} fourteen-forty {{/if}}">
+
+  {{#block "page"}}{{/block}}
+
+    {{{footer.scripts}}}
+    {{{snippet 'footer'}}}
+
+</body>
+</html>

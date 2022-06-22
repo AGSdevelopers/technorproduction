@@ -1,0 +1,8 @@
+<ul class="product-list">
+    {{#each this}}
+    <li class="product-card">
+        {{>components/products/card theme_settings=../theme_settings customer=../customer}}
+    </li>
+    {{/each}}
+    <div class="clear"></div>
+</ul>

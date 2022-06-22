@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+        <!-- {{{stylesheet '/assets/font-awesome/css/font-awesome.min.css'}}} -->
+        <script src="https://use.fontawesome.com/63220265b2.js" async></script>
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="{{cdn '/assets/modernizr-custom.js'}}" async></script>
+
+        {{{head.scripts}}}
+        {{{head.rsslinks}}}
+
+        {{inject 'themeSettings' theme_settings}}
+        {{inject 'genericError' (lang 'common.generic_error')}}
+        {{inject 'maintenanceMode' settings.maintenance}}
+        {{inject 'urls' urls}}
+        {{{snippet 'htmlhead'}}}
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+        {{{stylesheet '/assets/css/parts-warehouse.css'}}}
+        {{{stylesheet '/assets/css/custom.css'}}}
+        {{ getFontsCollection }}
+
+        <!-- Extend - Render SDK Scripts and configure store --> 
+        <script src="https://sdk.helloextend.com/extend-sdk-client/v1/extend-sdk-client.min.js" ></script> 
+        <script src="https://sdk.helloextend.com/extend-sdk-client-bigcommerce-addon/v1/extend-sdk-client-bigcommerce-addon.min.js" ></script> 
+        <script >Extend.config({ storeId: 'c3187703-71ad-4907-a614-eddbd3e0d4b4', environment: 'production' })</script>  
+        <!-- Extend - Render Product Integration Script --> 
+        {{>components/products/extend-product-integration}} 
+        <!-- Extend - End Extend Code -->
+    </head>
+    <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '22503d91-f385-4fe0-9d83-26ed2998f8f8', f: true }); done = true; } }; })();</script>
+    <body class="main{{#if theme_settings.body_width '===' 960}} nine-sixty{{/if}} {{#if theme_settings.body_width '===' 1170}} eleven-seventy {{/if}} {{#if theme_settings.body_width '===' 1280}} twelve-eighty {{/if}} {{#if theme_settings.body_width '===' 1366}} thirteen-sixty-six {{/if}} {{#if theme_settings.body_width '===' 1440}} fourteen-forty {{/if}}">
+
+        {{{snippet 'header'}}}
+        <div class="icons-svg-sprite">{{> components/common/icons/icon-defs }}</div>
+
+        {{#if settings.privacy_cookie}}
+            {{> components/common/cookie}}
+        {{/if}}
+
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+
+        <script>
+            // Exported in app.js
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+        </script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css">
+
+        <!-- JS -->
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous">
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+        <script>
+        // This will make sure WebFont.load is only used in the browser.
+        if (typeof window === 'undefined') {
+	        var WebFont = require('webfont');
+	        WebFont.load({
+		      google: {
+			      families: ['Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,', 'Roboto+Condensed:300,300i,400,400i,700,700i']
+		        },
+	        });
+        }
+        </script>
+
+	        <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.dotdotdot/3.2.2/jquery.dotdotdot.js"></script>
+
+
+
+        {{{footer.scripts}}}
+        {{{snippet 'footer'}}}
+    </body>
+</html>

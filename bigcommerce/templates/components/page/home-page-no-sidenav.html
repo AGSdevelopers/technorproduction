@@ -1,0 +1,74 @@
+
+<div class="full-width-main">
+    <div class="slider">
+        {{#if carousel}}
+            {{> components/carousel}}
+        {{/if}}
+    </div> <!-- slider -->
+    <div class="clear"></div>
+
+    {{#if banners.top}}
+        <div class="banners" data-banner-location="top">
+            <div class="banner">
+            {{{limit banners.top 1}}}
+            </div> <!-- banner -->
+            <div class="clear"></div>
+        </div> <!-- banners -->
+     {{/if}}
+
+     <div class="sideCategoryList mobile" id="side-categories" data-menu>
+     <div class="categories">
+         <h2 class="container-header">Shop by Category</h2>
+         <div class="category-list">
+             {{#each categories}}
+                 <li class="navPages-item">
+                     {{> components/common/navigation-list}}
+                 </li>
+             {{/each}}
+         </div> <!-- category-list -->
+     </div> <!-- categories -->
+     <div class="brands">
+         <h2 class="container-header">Shop by Brand</h2>
+         <div class="brands-list">
+             {{#each shop_by_brand}}
+                 <li>
+                     <a href="{{url}}">{{name}}</a>
+                 </li>
+             {{/each}}
+                 <li>
+                     <a href="/brands/">View all Brands</a>
+                 </li>
+         </div> <!-- brand-list -->
+     </div> <!-- brands -->
+     <div class="container-header shop-by-price">
+         {{#if category.faceted_search_enabled}}
+             {{> components/faceted-search/index category}}
+         {{else}}
+             {{> components/category/shop-by-price shop_by_price=category.shop_by_price category_url=category.url}}
+         {{/if}}
+     </div>
+     </div> <!-- sideCategoryList -->
+
+     {{#if products.featured}}
+         {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+     {{/if}}
+
+     {{#if products.top_sellers}}
+         {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+     {{/if}}
+
+     {{#if products.new}}
+         {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+     {{/if}}
+
+     {{#if banners.bottom}}
+         <div class="banners" data-banner-location="bottom">
+             <div class="banner">
+             {{{limit banners.bottom 1}}}
+             </div> <!-- banner -->
+         </div> <!-- banners -->
+      {{/if}}
+
+ <div class="clear"></div>
+
+</div> <!-- main full home -->

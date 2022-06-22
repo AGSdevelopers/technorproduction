@@ -1,0 +1,42 @@
+<div class="form-field" data-product-attribute="input-file">
+    <label class="form-label form-label--alternate form-label--inlineSmall" for="attribute_{{id}}">
+        {{ this.display_name }}:
+
+        {{#if required}}
+            <small>{{lang 'common.required'}}</small>
+        {{/if}}
+    </label>
+
+    <input class="form-file" type="file" id="attribute_{{id}}" name="attribute[{{this.id}}]" data-multiple-caption="{count} files selected" multiple />
+    <label for="form-file">Choose a file</label>
+    {{#if original_name}}
+        {{{lang 'products.file_option_set' url=file_url name=original_name}}}
+        <label>{{lang 'cart.remove_file'}}<input type="checkbox" name="{{file_remove}}"></label>
+    {{/if}}
+
+    <p class="form-fileDescription">{{#if file_size}}{{lang 'products.max_filesize'}} <strong>{{file_size}}</strong>, {{/if}}{{#if file_types}}{{lang 'products.filetypes'}} <strong>{{file_types}}</strong>{{/if}}</p>
+
+</div>
+
+<script>
+var inputs = document.querySelectorAll( 'input.form-file' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+    var label    = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+    input.addEventListener( 'change', function( e )
+    {
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+            fileName = e.target.value.split( '\\' ).pop();
+
+        if( fileName )
+            label.querySelector( 'span' ).innerHTML = fileName;
+        else
+            label.innerHTML = labelVal;
+    });
+});
+</script>

@@ -1,0 +1,112 @@
+<div class="previewCart">
+    {{#if cart.items.length}}
+        <ul class="previewCartList">
+            {{#each (limit cart.items 4)}}
+                <li class="previewCartItem">
+                    <div class="previewCartItem-image">
+                        {{#if type '==' 'GiftCertificate'}}
+                        <img src="{{cdn ../../theme_settings.default_image_gift_certificate}}" alt="GiftCertificate" title="GiftCertificate">
+                        
+                        <!-- Extend - Add Extend Logo for Warranties -->
+                        {{else if type '==' 'Custom'}}
+                        <img class="cart-item-fixed-image" data-sizes="auto" src="{{cdn 'img/extend_logo.png'}}"
+                            data-src="{{cdn ../theme_settings.default_image_extend}}" alt="Extend Protection Plan"
+                            title="Extend Protection Plan" />
+                        <!-- Extend - End Extend Code -->
+                        
+                        {{else}}
+                        <img src="{{getImage image 'productthumb_size' (cdn ../../theme_settings.default_image_product)}}" alt="{{image.alt}}"
+                            title="{{image.alt}}">
+                        {{/if}}
+                    </div>
+
+                    <div class="previewCartItem-content">
+                        <span class="previewCartItem-brand">
+                            {{brand.name}}
+                        </span>
+
+                        <!-- Extend - Remove links for warranties -->
+                        {{#if type '==' 'Custom'}}
+                        <h6 class="previewCartItem-name">
+                            <a alt="{{name}}">{{name}}</a>
+                        </h6>
+                        {{else}}
+                        <h6 class="previewCartItem-name">
+                            <a href="{{url}}" alt="{{name}}">{{name}}</a>
+                        </h6>
+                        {{/if}}
+                        <!-- Extend - End Extend Code -->
+                        
+                        <!-- Extend - Render item info -->
+                        {{#if type '==' 'Custom'}}
+                        <div id="extend-plan-item" data-extend-itemid={{id}}></div>
+                        {{/if}}
+                        <!-- Extend - End Extend Code -->
+                        
+                        <!-- Extend - Add Ajax Cart Offer -->
+                        <div id="extend-cart-offer" data-extend-item-id="{{id}}" data-extend-sku="{{sku}}" data-extend-quantity="{{quantity}}">
+                        </div>
+                        <!-- Extend - End Extend Code -->
+
+                        <span class="previewCartItem-price">
+                            {{#if quantity '>' 1}}
+                                {{quantity}} &times;
+                            {{/if}}
+                            {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
+                                {{price.formatted}}
+                            {{else}}
+                                {{> components/common/login-for-pricing}}
+                            {{/or}}
+                        </span>
+
+
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+        {{#if theme_settings.additional_payment_options_visibility '!==' "hidden"}}
+          <div class="previewCartCheckout-additionalCheckoutButtons">
+            {{#each cart.additional_checkout_buttons}}
+                {{{this}}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+        <div class="previewCartAction">
+            {{#if cart.show_primary_checkout_button}}
+                <div class="previewCartAction-checkout">
+                    <a href="{{urls.checkout.single_address}}" class="button button--small button--primary">
+                        {{lang 'cart.preview.checkout_now'}}
+                    </a>
+                </div>
+            {{/if}}
+
+            <div class="previewCartAction-viewCart{{#unless cart.show_primary_checkout_button}} previewCartAction-viewCart--sole{{/unless}}">
+                <a href="{{urls.cart}}" class="button button--small button--action">
+                    {{lang 'cart.preview.view_cart'}}
+                </a>
+            </div>
+
+            {{#if cart.show_multiple_address_shipping}}
+                <div class="previewCartAction-checkoutMultiple">
+                    <a href="{{urls.checkout.multiple_address}}">
+                        {{lang 'cart.preview.checkout_multiple'}}
+                    </a>
+                </div>
+            {{/if}}
+        </div>
+    {{else}}
+        <div class="previewCart-emptyBody">
+            {{lang 'cart.checkout.empty_cart'}}
+        </div>
+    {{/if}}
+</div>
+
+<style>
+    #extend-offers-modal-iframe {
+    z-index: 999999999999 !important;
+    }
+    #extend-learn-more-modal-iframe {
+    z-index: 999999999999 !important;
+    }
+</style>
